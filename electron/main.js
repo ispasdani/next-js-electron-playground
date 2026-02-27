@@ -1,12 +1,27 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
 
-let mainWindow;
+let win;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+  win = new BrowserWindow({
+    width: 1000,
+    height: 700,
+
+    minWidth: 500,
+    minHeight: 400,
+
+    resizable: true,
+    maximizable: true,
+    minimizable: true,
+
+    fullscreen: false,
+    fullscreenable: true,
+
+    alwaysOnTop: false,
+
+    title: "Counter Desktop",
+
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
@@ -15,10 +30,11 @@ function createWindow() {
   });
 
   // During development
-  mainWindow.loadURL("http://localhost:3000");
+  win.loadURL("http://localhost:3000");
+  win.setMenuBarVisibility(false);
 
   // Uncomment this later for production builds
-  // mainWindow.loadFile("../out/index.html");
+  // win.loadFile("../out/index.html");
 }
 
 app.whenReady().then(createWindow);
